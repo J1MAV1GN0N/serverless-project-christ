@@ -49,7 +49,7 @@ export const handler = middy(async (event: CustomAuthorizerEvent, context): Prom
   }
 })
 
-function verifyToken(authHeader: string, secret: string): JwtPayload {
+function verifyToken(authHeader: string, secretId: string): JwtPayload {
   if (!authHeader)
     throw new Error('No authentication header')
 
@@ -59,7 +59,7 @@ function verifyToken(authHeader: string, secret: string): JwtPayload {
   const split = authHeader.split(' ')
   const token = split[1]
 
-  return verify(token, secret) as JwtPayload
+  return verify(token, secretId) as JwtPayload
 }
 
 handler.use(

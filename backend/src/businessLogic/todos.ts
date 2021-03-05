@@ -3,7 +3,7 @@ import * as uuid from 'uuid';
 import { APIGatewayProxyEvent } from 'aws-lambda';
 
 import TodoDBAccessLayer from '../dataLayer/todosAccess';
-import TodoStorageLayer from '../dataLayer/TodoStorage';
+import TodoStorageLayer from '../dataLayer/todosStorage';
 import { getUserId } from '../lambda/utils';
 import { CreateTodoRequest } from '../requests/CreateTodoRequest';
 import { UpdateTodoRequest } from '../requests/UpdateTodoRequest';
