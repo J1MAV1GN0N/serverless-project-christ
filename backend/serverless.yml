@@ -4,6 +4,7 @@ service:
 plugins:
   - serverless-webpack
   - serverless-iam-roles-per-function
+  - serverless-plugin-canary-deployments
   - serverless-reqvalidator-plugin
   - serverless-dynamodb-local
   - serverless-offline  
@@ -65,7 +66,6 @@ functions:
       
 
   # TODO: Configure this function
-  GetTodos:
   CreateTodo:
     handler: src/lambda/http/createTodo.handler
     events:
