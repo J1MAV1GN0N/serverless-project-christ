@@ -21,7 +21,7 @@ provider:
     INDEX_NAME: UserIdIndex
     S3_BUCKET: serverless-todo-attachments-christ-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
-    AUTH0_SECRET_ID: 4cDoUVY2Q32ugg2DPXuKC66o-3S5sFzomFU2Ihv5PJL4QRPy_02B0rgTHinopw9R
+    AUTH0_SECRET_ID: dU6pL_RDXzFITTlmqOQ0z9hKGE-ozG9NOIfryowYw7xIRBEpXtUUsOMhKUXzQ1rQ
 
 
 custom:
