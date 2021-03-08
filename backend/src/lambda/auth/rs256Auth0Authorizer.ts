@@ -62,7 +62,7 @@ export const handler = async (event: CustomAuthorizerEvent): Promise<CustomAutho
     }
   }
   
-  function verifyToken(authHeader: string): JwtToken {
+  function verifyToken(authHeader: string): JwtPayload {
     if (!authHeader)
       throw new Error('No authentication header')
   
@@ -72,6 +72,6 @@ export const handler = async (event: CustomAuthorizerEvent): Promise<CustomAutho
     const split = authHeader.split(' ')
     const token = split[1]
   
-    return verify(token, cert, { algorithms: ['RS256'] }) as JwtToken
+    return verify(token, cert, { algorithms: ['RS256'] }) as JwtPayload
   }
   
