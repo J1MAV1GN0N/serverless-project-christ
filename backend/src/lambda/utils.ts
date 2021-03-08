@@ -14,17 +14,6 @@ import { parseUserId } from "../auth/utils";
   console.log("Value of Authorization:- " + authorization)
   const split = authorization.split(' ')
   const jwtToken = split[1]
-  return parseUserId(jwtToken)
-}
-
-
-/*
-
-export function getUserId(event: APIGatewayProxyEvent): string {
-  const authorization = event.headers.Authorization
-  const split = authorization.split(' ')
-  const jwtToken = split[1]
 
   return parseUserId(jwtToken)
 }
-*/
