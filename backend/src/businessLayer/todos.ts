@@ -2,15 +2,15 @@ import 'source-map-support/register';
 import * as uuid from 'uuid';
 import { APIGatewayProxyEvent } from 'aws-lambda';
 
-import TodoDBAccessLayer from '../dataLayer/todosAccess';
-import TodoStorageLayer from '../dataLayer/todosStorage';
+import TodosAccess from '../dataLayer/todosAccess';
+import TodosStorage from '../dataLayer/todosStorage';
 import { getUserId } from '../lambda/utils';
 import { CreateTodoRequest } from '../requests/CreateTodoRequest';
 import { UpdateTodoRequest } from '../requests/UpdateTodoRequest';
 import { TodoItem } from '../models/TodoItem';
 
-const todoAccessLayer = new TodoDBAccessLayer();
-const todoStorageLayer = new TodoStorageLayer();
+const todosAccess = new TodosAccess();
+const todosStorage = new TodosStorage();
 
 export async function createTodo(event: APIGatewayProxyEvent,
   createTodoRequest: CreateTodoRequest): Promise<TodoItem> {
@@ -23,11 +23,11 @@ export async function createTodo(event: APIGatewayProxyEvent,
     todoId,
     createdAt,
     done: false,
-    attachmentUrl: `https://${todoStorageLayer.getBucketName()}.s3.amazonaws.com/${todoId}`,
+    attachmentUrl: `https://${todosStorage.getBucketName()}.s3.amazonaws.com/${todoId}`,
     ...createTodoRequest
   };
 
-  await todoAccessLayer.addTodo(todoItem);
+  await todosAccess.addTodo(todoItem);
 
   return todoItem;
 }
@@ -36,13 +36,13 @@ export async function getTodo(event: APIGatewayProxyEvent) {
   const todoId = event.pathParameters.todoId;
   const userId = getUserId(event);
 
-  return await todoAccessLayer.getTodo(todoId, userId);
+  return await todosAccess.getTodo(todoId, userId);
 }
 
 export async function getTodos(event: APIGatewayProxyEvent) {
   const userId = getUserId(event);
 
-  return await todoAccessLayer.getAllTodos(userId);
+  return await todosAccess.getAllTodos(userId);
 }
 
 export async function updateTodo(event: APIGatewayProxyEvent,
@@ -50,11 +50,11 @@ export async function updateTodo(event: APIGatewayProxyEvent,
   const todoId = event.pathParameters.todoId;
   const userId = getUserId(event);
 
-  if (!(await todoAccessLayer.getTodo(todoId, userId))) {
+  if (!(await todosAccess.getTodo(todoId, userId))) {
     return false;
   }
 
-  await todoAccessLayer.updateTodo(todoId, userId, updateTodoRequest);
+  await todosAccess.updateTodo(todoId, userId, updateTodoRequest);
 
   return true;
 }
@@ -63,17 +63,17 @@ export async function deleteTodo(event: APIGatewayProxyEvent) {
   const todoId = event.pathParameters.todoId;
   const userId = getUserId(event);
 
-  if (!(await todoAccessLayer.getTodo(todoId, userId))) {
+  if (!(await todosAccess.getTodo(todoId, userId))) {
     return false;
   }
 
-  await todoAccessLayer.deleteTodo(todoId, userId);
+  await todosAccess.deleteTodo(todoId, userId);
 
   return true;
 }
 
 export async function generateUploadUrl(event: APIGatewayProxyEvent) {
-  const bucket = todoStorageLayer.getBucketName();
+  const bucket = todosStorage.getBucketName();
   const urlExpiration = process.env.SIGNED_URL_EXPIRATION;
   const todoId = event.pathParameters.todoId;
 
@@ -83,5 +83,5 @@ export async function generateUploadUrl(event: APIGatewayProxyEvent) {
     Expires: urlExpiration
   }
 
-  return todoStorageLayer.getPresignedUploadURL(createSignedUrlRequest);
+  return todosStorage.getPresignedUploadURL(createSignedUrlRequest);
 }
