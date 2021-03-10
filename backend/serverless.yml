@@ -4,7 +4,6 @@ service:
 plugins:
   - serverless-webpack
   - serverless-iam-roles-per-function
-  - serverless-plugin-canary-deployments
   - serverless-reqvalidator-plugin
   - serverless-dynamodb-local
   - serverless-offline
