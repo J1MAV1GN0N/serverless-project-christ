@@ -75,13 +75,12 @@ export async function deleteTodo(event: APIGatewayProxyEvent) {
 export async function generateUploadUrl(event: APIGatewayProxyEvent) {
   const bucket = todosStorage.getBucketName();
   const urlExpiration = process.env.SIGNED_URL_EXPIRATION
-  parseInt(urlExpiration);
   const todoId = event.pathParameters.todoId;
 
   const createSignedUrlRequest = {
     Bucket: bucket,
     Key: todoId,
-    Expires: urlExpiration
+    Expires: parseInt(urlExpiration)
   }
 
   return todosStorage.getPresignedUploadURL(createSignedUrlRequest);
