@@ -38,7 +38,6 @@ export const handler: DynamoDBStreamHandler = async (event: DynamoDBStreamEvent)
             type: 'todos',
             id: todoId,
             body
-        })
-    
+        }) 
     }
 }

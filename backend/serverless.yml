@@ -186,7 +186,7 @@ resources:
             KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
         StreamSpecification:
-          StreamViewType: NEW_TODO
+          StreamViewType: NEW_IMAGE
         TableName: ${self:provider.environment.TODOS_TABLE}
         LocalSecondaryIndexes:
           - IndexName: ${self:provider.environment.INDEX_NAME}
