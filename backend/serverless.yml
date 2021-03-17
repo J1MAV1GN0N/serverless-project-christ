@@ -142,7 +142,7 @@ functions:
       ES_ENDPOINT: !GetAtt TodosSearch.DomainEndpoint
     handler: src/lambda/dynamoDb/elasticSearchSync.handler
     events:
-      - stream
+      - stream:
           type: dynamodb
           arn: !GetAtt TodoTable.StreamArn      
 
