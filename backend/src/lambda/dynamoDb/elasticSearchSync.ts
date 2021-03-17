@@ -1,7 +1,7 @@
 import { DynamoDBStreamEvent, DynamoDBStreamHandler } from 'aws-lambda'
 import 'source-map-support/register'
-import * as elasticsearch from 'elasticsearch'
-import * as httpAwsEs from 'http-aws-es'
+import * as elasticsearch from 'elasticsearch';
+import * as httpAwsEs from 'http-aws-es';
 
 const esHost = process.env.ES_ENDPOINT
 
@@ -20,8 +20,6 @@ export const handler: DynamoDBStreamHandler = async (event: DynamoDBStreamEvent)
             continue
         }
     }
-
-    const newItem = record.dynamodb.NewTodo
 
     const todoId = newItem.todoId.S
 
