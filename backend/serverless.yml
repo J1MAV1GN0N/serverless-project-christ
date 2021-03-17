@@ -257,6 +257,6 @@ resources:
               Principal:
                 AWS: '*'
               Action: 'es:ESHttp*'
-              Resource: 'arn:aws:es:${self:provider.region}:${AWS::AccountId}:domain/todos-search-${self:provider.stage}/*'
+              Resource: '*'
 
               

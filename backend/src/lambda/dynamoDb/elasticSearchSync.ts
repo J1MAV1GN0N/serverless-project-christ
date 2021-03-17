@@ -29,7 +29,7 @@ export const handler: DynamoDBStreamHandler = async (event: DynamoDBStreamEvent)
             createdAt: newItem.todoId.S,
             name: newItem.name.S,
             dueDate: newItem.dueDate.S,
-            done: newItem.boolean.S,
+            done: newItem.boolean.B,
             attachmentUrl: newItem.attachmentUrl.S
         }
     
