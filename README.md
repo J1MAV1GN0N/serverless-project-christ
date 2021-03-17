@@ -18,6 +18,11 @@ npm install
 sls deploy -v
 ```
 
+To add an index pattern to Kiban for text search:
+- click the generated Kibana link
+- navigate to management -> add todos-index*
+- navigate to discover -> check available fields (left bar) -> perform full text search (bar top)
+
 ## Frontend
 
 To run a client application first edit the `client/src/config.ts` file to set correct parameters. And then run the following commands:
