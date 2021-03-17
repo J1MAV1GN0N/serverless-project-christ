@@ -21,7 +21,7 @@ export const handler: DynamoDBStreamHandler = async (event: DynamoDBStreamEvent)
         }
     }
 
-    const newItem = record.dynamodb.NewImage
+    const newItem = record.dynamodb.newTodo
 
     const todoId = newItem.todoId.S
 
