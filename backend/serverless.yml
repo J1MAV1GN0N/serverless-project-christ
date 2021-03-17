@@ -60,7 +60,7 @@ functions:
           method: get
           path: todos
           cors: true
-          authorizer: Auth
+          authorizer: RS256Auth
     iamRoleStatements:
       - Effect: Allow
         Action:
