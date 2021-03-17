@@ -26,15 +26,14 @@ export const handler: DynamoDBStreamHandler = async (event: DynamoDBStreamEvent)
         const body = {
             userId: newItem.userId.S,
             todoId: newItem.todoId.S,
-            createdAt: newItem.todoId.S,
+            createdAt: newItem.createdAt.S,
             name: newItem.name.S,
             dueDate: newItem.dueDate.S,
-            done: newItem.boolean.B,
             attachmentUrl: newItem.attachmentUrl.S
         }
     
         await es.index({
-            index: 'todo-index',
+            index: 'todos-index',
             type: 'todos',
             id: todoId,
             body
