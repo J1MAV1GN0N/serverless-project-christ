@@ -256,5 +256,7 @@ resources:
               Effect: Allow
               Principal:
                 AWS: '*'
-              Action: 'es:*'
-              Resource: '*'    
+              Action: 'es:ESHttp*'
+              Resource: 'arn:aws:es:${self:provider.region}:${AWS::AccountId}:domain/todos-search-${self:provider.stage}/*'
+
+              
